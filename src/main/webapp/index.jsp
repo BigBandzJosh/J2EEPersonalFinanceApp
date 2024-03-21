@@ -12,10 +12,6 @@
     <%
         String usernameHeader = (String) request.getSession().getAttribute("username");
     %> <h1>Welcome <%= usernameHeader%></h1>
-
-
-
-
 </div>
 <div class="container">
     <div class="login">
@@ -27,6 +23,12 @@
             <label for="loginPassword"></label><input type="password" id="loginPassword" name="password" required><br><br>
             <input type="submit" value="Login">
             <input type="reset" value="Reset">
+        </form>
+    </div>
+    <div class="login">
+        <h1>Logout</h1>
+        <form method="post" action="${pageContext.request.contextPath}/logout-servlet">
+            <input type="submit" value="Logout">
         </form>
     </div>
 <div class="registration">
@@ -47,8 +49,6 @@
     <input type="date" id="dob" name="dob" required><br><br>
     <input type="submit" value="Register">
     <input type="reset" value="Reset">
-
-    <a href="index.jsp">Login</a>
 </form>
 </div>
 </div>
