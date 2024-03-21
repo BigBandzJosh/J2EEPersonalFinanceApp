@@ -1,4 +1,4 @@
-package com.example.j2eepersonalfinanceapp;
+package com.example.j2eepersonalfinanceapp.Servlets;
 
 import java.io.*;
 
