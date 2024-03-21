@@ -1,11 +1,36 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Personal Finance App</title>
 </head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
 <body>
-<h1>Registration</h1>
+<div class="header">
+    <h1>Personal Finance App</h1>
+    <%
+        String usernameHeader = (String) request.getSession().getAttribute("username");
+    %> <h1>Welcome <%= usernameHeader%></h1>
+
+
+
+
+</div>
+<div class="container">
+    <div class="login">
+        <h1>Login</h1>
+        <form method="post" action="${pageContext.request.contextPath}/login-servlet">
+            <label for="username">Username:</label>
+            <label for="login"></label><input type="text" id="login" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <label for="loginPassword"></label><input type="password" id="loginPassword" name="password" required><br><br>
+            <input type="submit" value="Login">
+            <input type="reset" value="Reset">
+        </form>
+    </div>
+<div class="registration">
+    <h1>Registration</h1>
 
 <form method="post" action="${pageContext.request.contextPath}/registration-servlet">
     <label for="username">Username:</label>
@@ -25,6 +50,14 @@
 
     <a href="index.jsp">Login</a>
 </form>
+</div>
+</div>
+
+<div class="footer">
+    <p>Personal Finance App</p>
+</div>
+
+
 
 </body>
 </html>
