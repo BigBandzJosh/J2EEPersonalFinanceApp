@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `users`
     `first_name` varchar(255) NOT NULL,
     `last_name`  varchar(255) NOT NULL,
     `DateOfBirth` date        NOT NULL,
-    `created_at` timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`userid`),
     UNIQUE KEY `username` (`username`),
     UNIQUE KEY `email` (`email`)

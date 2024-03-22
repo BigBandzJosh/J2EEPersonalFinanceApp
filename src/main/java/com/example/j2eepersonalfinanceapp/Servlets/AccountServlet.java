@@ -1,0 +1,84 @@
+package com.example.j2eepersonalfinanceapp.Servlets;
+
+import com.example.j2eepersonalfinanceapp.DatabaseConnection.DBConnection;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.beans.JavaBean;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+
+@WebServlet(name = "accountServlet", urlPatterns = {"/account-servlet"})
+public class AccountServlet extends HttpServlet {
+    public AccountServlet() {
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    }
+
+    public void createAccount(int user_id, String accountName, String accountType, String balance) {
+        String query = "INSERT INTO accounts (user_id, accountName, accountType, balance) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = new DBConnection().getConnection().prepareStatement(query);
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.setString(2, accountName); // Set index to 2 for accountName
+            preparedStatement.setString(3, accountType); // Set index to 3 for accountType
+            preparedStatement.setString(4, balance); // Set index to 4 for balance
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        int userId = (int) session.getAttribute("userid");
+
+        String accountName = request.getParameter("accountName");
+        String accountType = request.getParameter("accountType");
+        String balance = request.getParameter("balance");
+
+        createAccount(userId, accountName, accountType, balance);
+
+
+        response.sendRedirect("financePage.jsp");
+    }
+
+
+    public void deleteAccount() {
+
+    }
+
+    public void updateAccount() {
+
+    }
+
+    public void getAccount() {
+
+    }
+
+    public ResultSet getAccounts() {
+        String query = "SELECT * FROM accounts";
+        try {
+            new DBConnection();
+            PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(query);
+            preparedStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
+    public void getAccountBalance() {
+
+    }
+
+
+}

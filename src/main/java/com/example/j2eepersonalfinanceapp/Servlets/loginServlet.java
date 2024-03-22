@@ -18,34 +18,41 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
-        request.getSession().setAttribute("username", username);
         String password = request.getParameter("password");
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        // Select from database
-        loginUser(username, hashedPassword);
+        // Authenticate user
+        int userId = authenticateUser(username, password);
 
-        response.sendRedirect("index.jsp");
+        if (userId != -1) {
+            // Set user ID and username in session upon successful login
+            request.getSession().setAttribute("userid", userId);
+            request.getSession().setAttribute("username", username);
+            response.sendRedirect("financePage.jsp"); // Redirect to finance page
+        } else {
+            // Handle unsuccessful login
+            response.sendRedirect("index.jsp?loginError=true"); // Redirect to login page with error message
+        }
     }
 
-    public boolean loginUser(String email, String password) {
-        String query = "SELECT * FROM users WHERE email = ?";
+
+    public int authenticateUser(String username, String password) {
+        String query = "SELECT userid, password FROM users WHERE username = ?";
         try {
-            DBConnection connection = new DBConnection();
-            PreparedStatement statement = connection.getConnection().prepareStatement(query);
-            statement.setString(1, email);
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(query);
+            statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
                 String hashedPassword = resultSet.getString("password");
-                return BCrypt.checkpw(password, hashedPassword);
+                if (BCrypt.checkpw(password, hashedPassword)) {
+                    // If password matches, return user ID
+                    return resultSet.getInt("userid");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1; // Return -1 if authentication fails
     }
-
-
 
 }

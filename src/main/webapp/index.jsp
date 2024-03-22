@@ -12,6 +12,7 @@
     <%
         String usernameHeader = (String) request.getSession().getAttribute("username");
     %> <h1>Welcome <%= usernameHeader%></h1>
+
 </div>
 <div class="container">
     <div class="login">
@@ -25,7 +26,7 @@
             <input type="reset" value="Reset">
         </form>
     </div>
-    <div class="login">
+    <div class="logout">
         <h1>Logout</h1>
         <form method="post" action="${pageContext.request.contextPath}/logout-servlet">
             <input type="submit" value="Logout">
