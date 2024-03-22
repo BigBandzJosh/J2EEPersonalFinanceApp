@@ -1,16 +1,16 @@
 package com.example.j2eepersonalfinanceapp.Servlets;
 
 import com.example.j2eepersonalfinanceapp.DatabaseConnection.DBConnection;
+import com.example.j2eepersonalfinanceapp.models.Account;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
-import java.beans.JavaBean;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 
 @WebServlet(name = "accountServlet", urlPatterns = {"/account-servlet"})
@@ -63,22 +63,8 @@ public class AccountServlet extends HttpServlet {
 
     }
 
-    public ResultSet getAccounts() {
-        String query = "SELECT * FROM accounts";
-        try {
-            new DBConnection();
-            PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(query);
-            preparedStatement.executeQuery();
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return null;
-    }
-
-    public void getAccountBalance() {
+    public void getAllAccounts() {
 
     }
-
 
 }

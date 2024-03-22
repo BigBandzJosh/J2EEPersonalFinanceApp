@@ -1,3 +1,8 @@
+
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.j2eepersonalfinanceapp.models.Account" %>
+<%@ page import="com.example.j2eepersonalfinanceapp.Servlets.getAccountServlet" %>
+<%@ page import="java.sql.ResultSet" %>
 <%--
   Created by IntelliJ IDEA.
   User: bigbandzjosh
@@ -16,7 +21,6 @@
 %> <h1>Welcome <%= usernameHeader%></h1>
 
 <%
-    //set user id
     int userId = (int) request.getSession().getAttribute("userid");
 %>
 <h1>welcome <%= userId%></h1>
@@ -41,6 +45,24 @@
             <th>Account Type</th>
             <th>Account Balance</th>
         </tr>
+        <%
+
+           getAccountServlet getAccountServlet = new getAccountServlet();
+            ResultSet rs = getAccountServlet.getAccounts(userId);
+            while(rs.next()){
+
+        %>
+        <tr>
+            <td><%= rs.getString("accountName") %></td>
+            <td><%= rs.getString("accountType") %></td>
+            <td><%= rs.getDouble("balance") %></td>
+        </tr>
+
+        <%
+            }
+        %>
+
+
         </table>
 
 </div>
