@@ -3,8 +3,10 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/SQL/Queries.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/j2eepersonalfinanceapp/Servlets/AccountServlet.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/j2eepersonalfinanceapp/Servlets/ChartServlet.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/j2eepersonalfinanceapp/Servlets/RegistrationServlet.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/j2eepersonalfinanceapp/Servlets/getAccountServlet.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/example/j2eepersonalfinanceapp/Servlets/loginServlet.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/j2eepersonalfinanceapp/Servlets/updateAccountServlet.java" dialect="MySQL" />
   </component>
 </project>

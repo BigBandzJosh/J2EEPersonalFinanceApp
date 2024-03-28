@@ -3,6 +3,8 @@
 <%@ page import="com.example.j2eepersonalfinanceapp.models.Account" %>
 <%@ page import="com.example.j2eepersonalfinanceapp.Servlets.getAccountServlet" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="com.example.j2eepersonalfinanceapp.Servlets.ChartServlet" %>
+<link rel="stylesheet" href="style.css">
 <%--
   Created by IntelliJ IDEA.
   User: bigbandzjosh
@@ -16,18 +18,22 @@
     <title>Your Finance</title>
 </head>
 <body>
+<div class="header">
+    <h1>Personal Finance App</h1>
 <%
     String usernameHeader = (String) request.getSession().getAttribute("username");
-%> <h1>Welcome <%= usernameHeader%></h1>
+%> <h1>Welcome <%= usernameHeader%> - username</h1>
 
 <%
     int userId = (int) request.getSession().getAttribute("userid");
 %>
-<h1>welcome <%= userId%></h1>
-<h1>Finance</h1>
+<h1>welcome <%= userId%> - userId</h1>
 <p>Here are your finances</p>
-<div>
-<h1>Enter your accounts here</h1>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2>Add Account</h2>
 <form action="${pageContext.request.contextPath}/account-servlet" method="post">
     <label for="accountName">Account Name:</label>
     <input type="text" id="accountName" name="accountName">
@@ -37,10 +43,27 @@
     <input type="text" id="balance" name="balance">
     <input type="submit" value="Add Account">
 </form>
+</div>
 
-    <h3>Here are your accounts and balances</h3>
+    <div class="card">
+        <h1>Update Account</h1>
+        <form method="post" action="${pageContext.request.contextPath}/update-account-servlet">
+            <label for="updateAccountId">Account ID:</label>
+            <input type="text" id="updateAccountId" name="updateAccountId">
+            <label for="updateAccountName">Account Name:</label>
+            <input type="text" id="updateAccountName" name="updateAccountName">
+            <label for="updateAccountType">Account Type:</label>
+            <input type="text" id="updateAccountType" name="updateAccountType">
+            <label for="updateBalance">Account Balance:</label>
+            <input type="text" id="updateBalance" name="updateBalance">
+            <input type="submit" value="Update Account">
+        </form>
+    </div>
+    <div class="card">
+        <h2>Accounts</h2>
     <table>
         <tr>
+            <th>Account ID</th>
             <th>Account Name</th>
             <th>Account Type</th>
             <th>Account Balance</th>
@@ -53,6 +76,7 @@
 
         %>
         <tr>
+            <td><%= rs.getInt("accountId") %></td>
             <td><%= rs.getString("accountName") %></td>
             <td><%= rs.getString("accountType") %></td>
             <td><%= rs.getDouble("balance") %></td>
@@ -61,11 +85,56 @@
         <%
             }
         %>
-
-
         </table>
 
 </div>
 
+<div class="card">
+    <h1>Delete Account</h1>
+    <form method="post" action="${pageContext.request.contextPath}/delete-account-servlet">
+        <label for="delAccountName">Account Name:</label>
+        <input type="text" id="delAccountName" name="delAccountName">
+        <input type="submit" value="Delete Account" onclick="alertFunc()">
+    </form>
+</div>
+    <script type="text/javascript">
+        window.onload = function() {
+
+            <%
+            ChartServlet chartServlet = new ChartServlet();
+            ResultSet accounts = chartServlet.getAccounts(userId);
+            if (accounts.next() != false) {
+            %>
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "Account Balances"
+                },
+                data: [{
+                    // Change type to "bar", "area", "spline", "pie",etc.
+                    type: "waterfall",
+                    yValueFormatString: "$#,##0",
+                    risingColor: "#50cdc8",
+                    fallingColor: "#ff6969",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        <% while(accounts.next()){ %>
+                        {y: <%= accounts.getDouble("balance") %>, label: "<%= accounts.getString("accountName") %>"},
+
+                        <% } %>
+                    ]
+                }]
+            });
+            chart.render();
+            <% } %>
+
+        }
+    </script>
+
+    <div id="chartContainer" style="height: 600px; width: 100%;"></div>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    </div>
 </body>
+<script src="javascript/alert.js"></script>
 </html>

@@ -50,21 +50,4 @@ public class AccountServlet extends HttpServlet {
         response.sendRedirect("financePage.jsp");
     }
 
-
-    public void deleteAccount() {
-
-    }
-
-    public void updateAccount() {
-
-    }
-
-    public void getAccount() {
-
-    }
-
-    public void getAllAccounts() {
-
-    }
-
 }

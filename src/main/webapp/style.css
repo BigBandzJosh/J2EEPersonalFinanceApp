@@ -1,45 +1,116 @@
-.header{
+/* Reset default margin and padding */
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set up basic styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.top-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    border: 1px solid #ccc;
+
+
+}
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header, .footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.header h1, .footer p {
+    margin: 0;
+}
+
+.login, .logout, .registration, .card , .delete{
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login h1, .logout h1, .registration h1 , delete h1{
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="submit"],
+input[type="reset"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: #555;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
     background-color: #f2f2f2;
-
-    text-align: center;
-    font-size: 30px;
-    color: #000000;
-    font-family: Arial, sans-serif;
 }
 
-
-/*Make container make resistration and login div left to right*/
-.container{
-    display: flex;
-    justify-content: space-evenly;
-    padding: 20px;
-    text-align: center;
-    font-size: 20px;
-    color: #000000;
-    font-family: Arial, sans-serif;
-
+/* Responsive styles */
+@media only screen and (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
 }
 
-.registration{
-    padding: 20px;
-    text-align: center;
-    font-size: 20px;
-    color: #000000;
-    font-family: Arial, sans-serif;
-}
-.login{
-    padding: 20px;
-    text-align: center;
-    font-size: 20px;
-    color: #000000;
-    font-family: Arial, sans-serif;
-}
-
-.footer{
-    background-color: #f2f2f2;
-    padding: 20px;
-    text-align: center;
-    font-size: 20px;
-    color: #000000;
-    font-family: Arial, sans-serif;
-}
