@@ -33,7 +33,7 @@
 
 <div class="container">
     <div class="card">
-        <h2>Add Account</h2>
+        <h1>Add Account</h1>
 <form action="${pageContext.request.contextPath}/account-servlet" method="post">
     <label for="accountName">Account Name:</label>
     <input type="text" id="accountName" name="accountName">
@@ -60,7 +60,7 @@
         </form>
     </div>
     <div class="card">
-        <h2>Accounts</h2>
+        <h1>Accounts</h1>
     <table>
         <tr>
             <th>Account ID</th>
@@ -97,6 +97,7 @@
         <input type="submit" value="Delete Account" onclick="alertFunc()">
     </form>
 </div>
+
     <script type="text/javascript">
         window.onload = function() {
 
@@ -113,7 +114,7 @@
                 },
                 data: [{
                     // Change type to "bar", "area", "spline", "pie",etc.
-                    type: "waterfall",
+                    type: "bar",
                     yValueFormatString: "$#,##0",
                     risingColor: "#50cdc8",
                     fallingColor: "#ff6969",
@@ -133,8 +134,21 @@
     </script>
 
     <div id="chartContainer" style="height: 600px; width: 100%;"></div>
+
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
+    <div class="card">
+        <h1>Logout</h1>
+        <form method="post" action="${pageContext.request.contextPath}/logout-servlet">
+            <input type="submit" value="Logout">
+        </form>
     </div>
+
+
+
+</div>
+
+
 </body>
 <script src="javascript/alert.js"></script>
 </html>
